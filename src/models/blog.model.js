@@ -5,13 +5,28 @@
 const mongoose = require("mongoose");
 
 // BLOG CATEGORY:
-const blogCategorySchema = 
+const blogCategorySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+  },
+  {
+    collection: "blogCaterogy",
+    timestamps: true,
+  },
+);
 
 // BLOG POST:
 const blogPostSchema = new mongoose.Schema(
   {
-    //_id
-    //categoryId
+    blogCategoryId: {
+      type: mongoose.Schema.Types.ObjectId, // ForeignKey, RelationalID
+      ref: "BlogCategory",
+    },
+
     title: {
       type: String,
       trim: true,
@@ -36,6 +51,7 @@ const blogPostSchema = new mongoose.Schema(
 //module.exports = {BlogPost: BlogPostModel,};
 
 module.exports = {
+  BlogCategory: mongoose.model("Blogcategory", blogCategorySchema),
   BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };
 
