@@ -16,6 +16,7 @@ const blogCategorySchema = new mongoose.Schema(
   {
     collection: "blogCaterogy",
     timestamps: true,
+    required: true,
   },
 );
 
