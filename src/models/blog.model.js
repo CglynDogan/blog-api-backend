@@ -4,6 +4,10 @@
 
 const mongoose = require("mongoose");
 
+// BLOG CATEGORY:
+const blogCategorySchema = 
+
+// BLOG POST:
 const blogPostSchema = new mongoose.Schema(
   {
     //_id

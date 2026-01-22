@@ -4,7 +4,7 @@ Express.js ve MongoDB (Mongoose) kullanarak geliştirilen backend projesi.
 
 ## Proje Açıklaması
 
-Bu proje, backend geliştirme temellerini öğrenmek amacıyla oluşturulmuştur. Express ile REST API oluşturmayı, MongoDB ile veri yönetimini ve middleware konseptlerini pratik etmek için kullanılmaktadır.
+Bu proje, backend geliştirme temellerini öğrenmek amacıyla oluşturulmuştur. Express ile REST API oluşturmayı, MongoDB ile veri yönetimini ve middleware konseptlerini pratik etmek için kullanılmaktadır ve tamamiyle tekrar amaçlıdır.
 
 ## Proje Yapısı
 
