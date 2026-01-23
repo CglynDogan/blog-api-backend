@@ -22,7 +22,7 @@ app.all("/", (req, res) => {
   res.send("WELCOME BLOG API PROJECT");
 });
 
-app.use("/blog", require("./src/routes/blog.route"));
+app.use("/blog", require("./src/routes/blog.router"));
 app.use(require("./src/middlewares/errorHandler"));
 app.listen(PORT, () => console.log(`Server Running on http://${HOST}:${PORT}`));
 
