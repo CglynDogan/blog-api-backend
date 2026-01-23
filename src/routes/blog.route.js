@@ -4,10 +4,19 @@
 
 const router = require("express").Router();
 
-const { BlogPost } = require("../controllers/blog.controller");
+const { BlogCategory, BlogPost } = require("../controllers/blog.controller");
 
+// BlogCategory:
+router.route("/categories").get(BlogCategory.list).post(BlogCategory.create);
+router
+  .route("/categories/:categoryId")
+  .get(BlogCategory.read)
+  .put(BlogCategory.update) // put patch ayni
+  //   .patch(BlogPost.update)
+  .delete(BlogCategory.delete);
+
+// BlogPost:
 router.route("/posts").get(BlogPost.list).post(BlogPost.create);
-
 router
   .route("/posts/:postId")
   .get(BlogPost.read)
