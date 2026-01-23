@@ -8,9 +8,9 @@ const User = require("../controllers/user.controller");
 
 //User:
 
-router.route("/users").get(User.list).post(User.create);
+router.route("/").get(User.list).post(User.create);
 router
-  .route("/users/:userId")
+  .route("/:userId")
   .get(User.read)
   .put(User.update)
   //  .patch(User.update)
