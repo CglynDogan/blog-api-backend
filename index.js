@@ -27,6 +27,13 @@ require("./src/configs/dbConnection");
 
 const session = require("cookie-session");
 
+app.use(
+  session({
+    secret: process.env.SECRET_KEY, // Sifreleme anahtari
+    maxAge: 1000 * 60 * 60 * 24 * 3, // miliseconds // days
+  }),
+);
+
 app.all("/", (req, res) => {
   res.send("WELCOME BLOG API PROJECT");
 });
