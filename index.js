@@ -16,7 +16,16 @@ require("dotenv").config();
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
+// DB Connection //
 require("./src/configs/dbConnection");
+
+// ---------------------- //
+// SessionCooies:
+// https://expressjs.com/en/resources/middleware/cookie-session.html
+// https://www.npmjs.com/package/cookie-session
+//* $ npm i cookie-session
+
+const session = require("cookie-session");
 
 app.all("/", (req, res) => {
   res.send("WELCOME BLOG API PROJECT");
