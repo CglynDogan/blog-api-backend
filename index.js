@@ -1,48 +1,71 @@
 "use strict";
-
+/* -------------------------------------------------------
+    EXPRESSJS - BLOG API
+------------------------------------------------------- */
 /*
-    BLOG API with Mongosse 
+    BLOG API with Mongoose
 */
-// npm i express dotenv express-async-erros
-// npm i mongoose
+/*
+    $ npm i express dotenv express-async-errors
+    $ npm i mongoose
+*/
 const express = require("express");
 const app = express();
 
-/* */
-
-app.use(express.json());
+app.use(express.json()); // yukarıda  kalsın
 
 require("dotenv").config();
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 
-// DB Connection //
-require("./src/configs/dbConnection");
+/* DB connection  */
+require("./src/configs/dbConnection"); // dotenv çalıştıktan sonra
 
-// ---------------------- //
-// SessionCooies:
-// https://expressjs.com/en/resources/middleware/cookie-session.html
+/* ------------------------------------------------------- */
+// SessionCookies:
+// http://expressjs.com/en/resources/middleware/cookie-session.html
 // https://www.npmjs.com/package/cookie-session
 //* $ npm i cookie-session
 
 const session = require("cookie-session");
-
 app.use(
   session({
-    secret: process.env.SECRET_KEY, // Sifreleme anahtari
-    // maxAge: 1000 * 60 * 60 * 24 * 3, // miliseconds // days
+    secret: process.env.SECRET_KEY, // Şifreleme anahtarı
+    // maxAge: 1000 * 60 * 60 * 24 * 3  // miliseconds // 3 days
   }),
 );
+/* ------------------------------------------------------- */
 
-// ---------------------------------------- //
+// Check logined User:
+app.use(require("./src/middlewares/userControl"));
+
+/* ------------------------------------------------------- */
 
 app.all("/", (req, res) => {
-  res.send("WELCOME BLOG API PROJECT");
+  // res.send('WELCOME BLOG API PROJECT')
+  if (req.isLogin) {
+    res.send({
+      error: false,
+      message: "WELCOME BLOG API PROJECT",
+      session: req.session,
+      user: req.user,
+    });
+  } else {
+    res.send({
+      error: false,
+      message: "WELCOME BLOG API PROJECT",
+      session: req.session,
+    });
+  }
 });
 
 app.use("/user", require("./src/routes/user.router"));
 app.use("/blog", require("./src/routes/blog.router"));
-app.use(require("./src/middlewares/errorHandler"));
-app.listen(PORT, () => console.log(`Server Running on http://${HOST}:${PORT}`));
 
-// require("./src/sync")();
+app.use(require("./src/middlewares/errorHandler")); // aşağıda kalsın
+
+app.listen(PORT, () =>
+  console.log(` Server Running on http://${HOST}:${PORT}`),
+);
+
+// require('./src/sync')()

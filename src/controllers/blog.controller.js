@@ -1,15 +1,17 @@
 "use strict";
-
-/* BLOG API CONTROLLES */
+/* ====================================================== */
+/*                     BLOG API CONTROLLERS               */
+/* ====================================================== */
 
 require("express-async-errors");
+
 const { BlogCategory, BlogPost } = require("../models/blog.model");
 
-// module.exports = {
-//   key: "value",
-//   key2: "value",
-// };
+// module.exports={
+//     "key":"value",
+//     "key2":"value",
 
+// }
 // module.exports.key:"value"
 // module.exports.key2:"value"
 
@@ -38,21 +40,22 @@ module.exports.BlogCategory = {
   },
   update: async (req, res) => {
     const data = await BlogCategory.updateOne(
-      { _id: req.params.postId },
+      { _id: req.params.categoryId },
       req.body,
     );
     const newdata = await BlogCategory.find({ _id: req.params.categoryId });
     res.status(202).send({
       error: false,
+      body: req.body,
       data: data, // info about update
-      // guncel veriyi istiyorsan tekrar cagir
+      // güncel veriyi istiyorsan tekrar çağır
       newdata: newdata,
     });
   },
   delete: async (req, res) => {
     const data = await BlogCategory.deleteOne({ _id: req.params.categoryId });
     // console.log(data);
-    res.sendStatus(data.deletedCount >= 1 ? 204 : 404).send({});
+    res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
   },
 };
 
@@ -84,14 +87,15 @@ module.exports.BlogPost = {
     const newdata = await BlogPost.find({ _id: req.params.postId });
     res.status(202).send({
       error: false,
+      body: req.body,
       data: data, // info about update
-      // guncel veriyi istiyorsan tekrar cagir
+      // güncel veriyi istiyorsan tekrar çağır
       newdata: newdata,
     });
   },
   delete: async (req, res) => {
     const data = await BlogPost.deleteOne({ _id: req.params.postId });
     // console.log(data);
-    res.sendStatus(data.deletedCount >= 1 ? 204 : 404).send({});
+    res.sendStatus(data.deletedCount >= 1 ? 204 : 404);
   },
 };

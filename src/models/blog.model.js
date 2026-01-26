@@ -1,6 +1,7 @@
 "use strict";
-
-/* BLOG API Models */
+/*
+    BLOG API MODELS
+*/
 
 const mongoose = require("mongoose");
 
@@ -14,9 +15,8 @@ const blogCategorySchema = new mongoose.Schema(
     },
   },
   {
-    collection: "blogCaterogy",
+    collection: "blogCategory",
     timestamps: true,
-    required: true,
   },
 );
 
@@ -26,6 +26,7 @@ const blogPostSchema = new mongoose.Schema(
     blogCategoryId: {
       type: mongoose.Schema.Types.ObjectId, // ForeignKey, RelationalID
       ref: "BlogCategory",
+      required: true,
     },
 
     title: {
@@ -33,6 +34,7 @@ const blogPostSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+
     content: {
       type: String,
       trim: true,
@@ -44,60 +46,53 @@ const blogPostSchema = new mongoose.Schema(
       default: true,
     },
 
-    //  createdAt,
-    //  updatedAt
+    //  createdAt //  updatedAt
   },
   {
-    collection: "BlogPost",
+    collection: "blogPost",
     timestamps: true,
   },
 );
+// mongoose.model('model ismi','hangi şemadan')
 
-// mongoose.model('model ismi', 'hangi semadan')
-// const BlogPostModel = mongoose.model("BlogPost", blogPostSchema);
-//module.exports = {BlogPost: BlogPostModel,};
+// const BlogPostModel= mongoose.model('BlogPost',blogPostSchema)
+// module.exports={
+//     BlogPost: BlogPostModel,
+
+// }
 
 module.exports = {
-  BlogCategory: mongoose.model("Blogcategory", blogCategorySchema),
+  BlogCategory: mongoose.model("BlogCategory", blogCategorySchema),
   BlogPost: mongoose.model("BlogPost", blogPostSchema),
 };
 
-//const nameSchema= new mongoose.Schema({fields},{tablo adi})
-
+// const nameSchema= new mongoose.Schema({fields},{tablo adı})
 /*
-const nameSchema = new mongoose.Schema(
-  {
-    // _id: // auto created and increment
-    // fieldName: Type // short form
-    // fieldName: String,
-    // fieldName2: BigInt
+const nameSchema= new mongoose.Schema(
+    {
+        //    _id: // auto created and increment
 
-    fieldName: {
-      type: String,
-      default: null,
-      trim: true, // default oposite
-      unique: true, // default oposite
-      select: false, // default oposite
-      index: false, // default oposite
-      required: [true, "error message"],
-      enum: [[1, 2, 3], "error message"], // belirli bir patterne gore veri girisi
-      validate: [
-        function (data) {
-          return true;
-        },
-        "error message",
-      ], // veriyi fonksiyon ile dogrulama
-      get: function (data) {
-        return true;
-      }, // veriyi cagirirken calisacak fonksiyon
-      set: function (data) {
-        return true;
-      }, // veriyi kayit ederken calisacak fonksiyon
+        // fieldName: Type // short form
+        // fieldName: String,
+        // fieldName2: BigInt
+
+        fieldName: {
+            type: String,
+            default: null,
+            trim: true,  
+            unique: true, // benzersiz kayıt
+            select: false, //model çağrıldığında gelsinmi
+            index: false, // aramalarda erişimi hızlandırır
+            required: true, // veri girişi gerklimi
+            required: [true, 'error message'], // gereklimi değilmi , hata mesajı
+            enum:[[1,2,3],'error message'], // belirli bir pattern e göre veri girişi
+            validate: [function(data){ return true},'error message'],// veri fonksiyon ile doğrulama
+            get: function(data){ return data} ,      // veriyi çağırırken çalışacak fonksiyon
+            set: function(data){ return data}       // veriyi kaydederken çalışacak fonksiyon
+        }
     },
-  },
-  {
-    collection: "collectionName", // tablo ismi
-    timestamps: true, // createDate, updateDate
-  },
-);
-*/
+    {
+        collection:'collectionName', // tablo ismi
+        timestamps: true // createdate, updateDate
+    }
+)*/
